@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mantenimiento Textil</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- Librería para generar el QR visual -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+   <!-- PANTALLA 1: INICIO -->
+<section id="pantalla-1" class="pantalla activa">
+    <h1 class="titulo-moderno">Mantenimiento de máquina de confección textil</h1>
+        
+       <div class="contenedor-imagen" style="display: flex; gap: 8px;">
+    <img src="cerradora automática.JPG" alt="Imagen 1" style="width: 50%; height: 160px; object-fit: cover; border-radius: 8px;">
+    <img src="juki.png" alt="Imagen 2" style="width: 50%; height: 160px; object-fit: cover; border-radius: 8px;">
+</div>
+
+<div class="contenedor-botones-inicio" style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+    <button id="btn-escanear-qr" class="btn btn-primario">Escanear QR</button>
+    <button id="btn-ingresar-codigo" class="btn btn-secundario">Busqueda avanzada....</button>
+    
+    <!-- Botón forzado a mostrarse -->
+    <button id="btn-abrir-form-maquina" style="background-color: #059669; color: white; padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        ➕ Añadir Nueva Máquina
+    </button>
+</div>
+
+        <div id="lector-qr-container" style="display:none; margin-top:15px;">
+            <div id="reader" style="width: 100%;"></div>
+            <button id="btn-cerrar-qr" class="btn btn-peligro" style="margin-top:10px;">Cancelar Escaneo</button>
+        </div>
+    </section>
+
+    <!-- PANTALLA 2: REGISTRO DE MANTENIMIENTO -->
+    <section id="pantalla-2" class="pantalla oculto">
+        
+        <div class="encabezado-banner">
+            <button id="btn-atras" class="btn-atras-flecha">
+                <svg class="flecha-svg" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <polygon points="25,0 100,0 100,40 25,40 0,20" fill="#e2e8f0" />
+                </svg>
+                <span>Inicio</span>
+            </button>
+            <h2>REGISTRO DE MANTENIMIENTO</h2>
+        </div>
+
+        <div class="seccion-datos-maquina-grid">
+            <div class="columna-imagen-maquina" style="text-align: center;">
+                <img id="img-maquina-detalle" src="https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=300&auto=format&fit=crop" alt="Máquina" style="max-width: 100%; border-radius: 6px;">
+            </div>
+            <div class="columna-info-maquina" id="datos-maquina-contenido">
+            </div>
+        </div>
+
+        <div class="contenedor-pestanas">
+            <button type="button" id="btn-pestana-correctivo" class="btn-pestana activa">
+                <span>🔧</span> Mantenimiento<br>Correctivo
+            </button>
+            <button type="button" id="btn-pestana-preventivo" class="btn-pestana">
+                <span>📋</span> Mantenimiento<br>Preventivo
+            </button>
+        </div>
+
+        <!-- VISTA CORRECTIVO -->
+        <div id="vista-correctivo" class="seccion-mantenimiento">
+            <h3>Formulario Mantenimiento Correctivo</h3>
+            
+            <form id="form-correctivo">
+                <div class="grupo-input">
+                    <label for="corr-tecnico">Técnico:</label>
+                    <input type="text" id="corr-tecnico" placeholder="Nombre del técnico" required>
+                </div>
+
+                <div class="grupo-input-doble">
+                    <div class="grupo-input">
+                        <label for="corr-hora-inicio">Hora de Inicio:</label>
+                        <input type="time" id="corr-hora-inicio" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="corr-hora-fin">Hora Fin:</label>
+                        <input type="time" id="corr-hora-fin" required>
+                    </div>
+                </div>
+
+                <h4>Checklist de Fallas Reportadas</h4>
+                <div class="checklist">
+                    <label><input type="checkbox" name="fallas" value="Ruptura de aguja"> Ruptura de aguja</label>
+                    <label><input type="checkbox" name="fallas" value="Salto de puntada"> Salto de puntada</label>
+                    <label><input type="checkbox" name="fallas" value="Rotura de hilo"> Rotura de hilo</label>
+                    <label><input type="checkbox" name="fallas" value="Ruido atípico/excesivo"> Ruido atípico/excesivo</label>
+                    <label><input type="checkbox" name="fallas" value="Bloqueo de faja/motor"> Bloqueo de faja/motor</label>
+                </div>
+
+                <label>Otros problemas reportados:</label>
+                <textarea id="corr-otros-problemas" rows="2" placeholder="Describa otros problemas..."></textarea>
+
+                <h4>Checklist de Hallazgos</h4>
+                <div class="checklist">
+                    <label><input type="checkbox" name="hallazgos" value="Garfio desgastado"> Garfio desgastado</label>
+                    <label><input type="checkbox" name="hallazgos" value="Dientes desgastados"> Dientes desgastados</label>
+                    <label><input type="checkbox" name="hallazgos" value="Falta de lubricación"> Falta de lubricación</label>
+                    <label><input type="checkbox" name="hallazgos" value="Tensión desajustada"> Tensión desajustada</label>
+                    <label><input type="checkbox" name="hallazgos" value="Plancha de aguja dañada"> Plancha de aguja dañada</label>
+                </div>
+
+                <label>Otros hallazgos:</label>
+                <textarea id="corr-otros-hallazgos" rows="2" placeholder="Escriba otros hallazgos encontrados..."></textarea>
+
+                <button type="submit" class="btn btn-guardar">Guardar Mantenimiento Correctivo</button>
+            </form>
+
+            <hr>
+            <div class="titulo-historial">Historial de Mantenimientos Correctivos</div>
+            <div id="historial-correctivo" class="bloque-historial">
+                <p>Cargando historial...</p>
+            </div>
+        </div>
+
+        <!-- VISTA PREVENTIVO -->
+        <div id="vista-preventivo" class="seccion-mantenimiento oculto">
+            <h3>Formulario Mantenimiento Preventivo</h3>
+            
+            <form id="form-preventivo">
+                <div class="grupo-input">
+                    <label for="prev-tecnico">Técnico:</label>
+                    <input type="text" id="prev-tecnico" placeholder="Nombre del técnico" required>
+                </div>
+
+                <div class="grupo-input-doble">
+                    <div class="grupo-input">
+                        <label for="prev-hora-inicio">Hora de Inicio:</label>
+                        <input type="time" id="prev-hora-inicio" required>
+                    </div>
+                    <div class="grupo-input">
+                        <label for="prev-hora-fin">Hora Fin:</label>
+                        <input type="time" id="prev-hora-fin" required>
+                    </div>
+                </div>
+
+                <h4>Checklist de Actividades Preventivas</h4>
+                <div class="checklist">
+                    <label><input type="checkbox" name="actividades" value="Limpieza general e interna"> Limpieza general e interna</label>
+                    <label><input type="checkbox" name="actividades" value="Lubricación y cambio de aceite"> Lubricación y cambio de aceite</label>
+                    <label><input type="checkbox" name="actividades" value="Ajuste de faja/motor"> Ajuste de faja/motor</label>
+                    <label><input type="checkbox" name="actividades" value="Calibración de tiempo de garfio"> Calibración de tiempo de garfio</label>
+                    <label><input type="checkbox" name="actividades" value="Revisión del sistema eléctrico/servo"> Revisión del sistema eléctrico/servo</label>
+                </div>
+
+                <label>Observaciones:</label>
+                <textarea id="prev-observaciones" rows="3" placeholder="Añada observaciones adicionales..."></textarea>
+
+                <button type="submit" class="btn btn-guardar">Guardar Mantenimiento Preventivo</button>
+            </form>
+
+            <hr>
+            <div class="titulo-historial">Historial de Mantenimientos Preventivos</div>
+            <div id="historial-preventivo" class="bloque-historial">
+                <p>Cargando historial...</p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- PANTALLA NUEVA MÁQUINA -->
+    <section id="pantalla-nueva-maquina" class="pantalla oculto">
+        <div class="encabezado-banner" style="background-color: #059669;">
+            <button id="btn-atras-form-maquina" class="btn-atras-flecha">
+                <svg class="flecha-svg" viewBox="0 0 100 40" preserveAspectRatio="none">
+                    <polygon points="25,0 100,0 100,40 25,40 0,20" fill="#e2e8f0" />
+                </svg>
+                <span>Inicio</span>
+            </button>
+            <h2>NUEVA MÁQUINA</h2>
+        </div>
+
+        <form id="form-nueva-maquina">
+            <!-- AQUÍ SE CARGARÁN TODOS LOS ENCABEZADOS DE TU EXCEL AUTOMÁTICAMENTE -->
+            <div id="contenedor-inputs-dinamicos">
+                <p style="color: var(--text-muted);">Cargando campos desde Google Sheets...</p>
+            </div>
+
+            <button type="submit" class="btn btn-guardar">Guardar Máquina</button>
+        </form>
+    </section>
+
+    <script src="app.js"></script>
+
+    <!-- MODAL / CUADRO FLOTANTE DE ETIQUETA QR -->
+    <div id="modal-qr-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 280px; width: 90%; position: relative;">
+            <button onclick="toggleModalQr()" style="position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #64748b;">✕</button>
+            
+            <div style="margin-top: 15px; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px solid #cbd5e1;">
+                <div id="modal-qr-code-canvas" style="display: inline-block; background: white; padding: 6px; border-radius: 4px;"></div>
+                <p id="modal-texto-codigo-qr" style="margin-top: 8px; font-weight: bold; font-size: 1.1rem; color: #1e293b; letter-spacing: 1px;"></p>
+                <button type="button" id="modal-btn-imprimir-etiqueta" class="btn" style="background-color: #2563eb; color: white; margin-top: 10px; width: 100%; padding: 8px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                    🖨️ Imprimir Etiqueta QR
+                </button>
+            </div>
+        </div>
+    </div>
+   <!-- MODAL DE BÚSQUEDA AVANZADA FLOTANTE -->
+<div id="modal-busqueda-avanzada" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 320px; width: 90%; position: relative;">
+        <button onclick="cerrarModalBusqueda()" style="position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #64748b;">✕</button>
+        
+        <h3 id="titulo-modal-busqueda" style="margin-top: 0; color: #1e293b; font-size: 1.2rem; margin-bottom: 15px;">Buscar por...</h3>
+        
+        <div id="contenido-modal-busqueda" style="max-height: 280px; overflow-y: auto; text-align: left;">
+            <!-- Contenido dinámico -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
