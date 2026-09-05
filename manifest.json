@@ -4,7 +4,7 @@
   "display": "standalone",
   "name": "APP1MANTEX",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/APP1MANTEX/",
   "short_name": "MANTENIMIENTO",
   "start_url": "https://script.google.com/macros/s/AKfycbxHGDYZRV02Gfl84SF8cvsn8H6cBnPCVUdGgQzcsA9aAPFDnDGunadOffujl_lVNiwX/exec",
   "theme_color": "#ffffff",
