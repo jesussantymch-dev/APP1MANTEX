@@ -1,0 +1,12 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "APP1MANTEX",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "MANTENIMIENTO",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "description": "APLICACION DE MANTENIMIENTO"
+}
