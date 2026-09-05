@@ -4,8 +4,8 @@
   "display": "standalone",
   "name": "MYAPP",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/APP1MANTEX/",
   "short_name": "MANTENIMIENTO",
-  "start_url": "/",
+  "start_url": "/APP1MANTEX/",
   "theme_color": "#ffffff"
 }
