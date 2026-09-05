@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "MYAPP",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "MANTENIMIENTO",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
